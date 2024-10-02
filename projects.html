@@ -58,11 +58,24 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <img class="img-fluid w-100 h-100 p-4" src="assets/mario.jpeg" alt="The Ascendant" />
+                                            <!-- Image that will be replaced by the video on hover -->
+                                            <img id="hoverImage" class="img-fluid w-100 h-100 p-4" src="assets/mario.jpeg" alt="The Ascendant" />
+                                            <!-- Hidden video element -->
+                                            <video id="hoverVideo" class="img-fluid w-100 h-100 p-4" src="assets/demo-video.mp4" controls style="display: none;"></video>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="text-end p-3">
+                                    <a href="https://your-project-link.com" target="_blank" class="text-decoration-none">
+                                        <button class="w-25 text-center p-1 bg-outline-primary rounded-3 border-0">View</button>
+                                    </a>
+                                </div>
                             </div>
+                            
+                            
+                            
+                            
+
             
                             <!-- Project - 2  AI Visuals -->
                             <div data-aos="zoom-out" data-aos-duration="2500" class="card overflow-hidden shadow rounded-4 border-0 mb-5">
@@ -129,7 +142,36 @@
             window.onload = function() {
               AOS.init();
             };
+
+
+            
           </script>
+          <script>
+
+            // for showing video over image..
+            const image = document.getElementById('hoverImage');
+            const video = document.getElementById('hoverVideo');
+            let timer;
+        
+            image.addEventListener('mouseover', () => {
+                timer = setTimeout(() => {
+                    image.style.display = 'none'; // Hide the image
+                    video.style.display = 'block'; // Show the video
+                    video.play(); // Play the video
+                }, 1500); // Delay in milliseconds (2000ms = 2 seconds)
+            });
+        
+            image.addEventListener('mouseout', () => {
+                clearTimeout(timer); // Cancel the timer if the mouse leaves the image
+            });
+        
+            video.addEventListener('mouseleave', () => {
+                video.pause(); // Pause the video if the mouse leaves the video area
+                video.currentTime = 0; // Reset video time
+                video.style.display = 'none'; // Hide the video
+                image.style.display = 'block'; // Show the image again
+            });
+        </script>
           
     </body>
 </html>
